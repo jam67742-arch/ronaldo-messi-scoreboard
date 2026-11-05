@@ -25,7 +25,7 @@ jobs:
         run: unzip Ronaldo_Messi_Android_Studio_Project.zip
 
       - name: Build APK
-        run: gradle -p RonaldoMessiAndroidProject assembleDebug
+        run: 
 
       - uses: actions/upload-artifact@v4
         with:
