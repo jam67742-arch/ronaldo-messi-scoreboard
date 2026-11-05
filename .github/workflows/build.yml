@@ -1,46 +1,8 @@
-
-name: Build Ronaldo Messi APK
-
-on:
-  workflow_dispatch:
-  push:
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
-
       - name: Setup Android SDK
         uses: android-actions/setup-android@v4
         with:
-          log-accepted-android-sdk-licenses: 'false'
+          cmdline-tools-version: 12266719
 
       - name: Install Android SDK Platform
-        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.7'
-
-      - name: Extract Android project
-        run: unzip Ronaldo_Messi_Android_Studio_Project.zip
-
-      - name: Build APK
-        run: gradle -p RonaldoMessiAndroidProject assembleDebug
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: Ronaldo-Messi-APK
-          path: RonaldoMessiAndroidProject/app/build/outputs/apk/debug/app-debug.apk
-          
+        run: |
+          sdkmanager --install "platforms;android-35" "build-tools;35.0.0"
